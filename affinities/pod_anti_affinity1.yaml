@@ -1,0 +1,26 @@
+apiVersion: v1
+kind: Pod
+metadata:
+  name: myapp-a1
+  labels:
+    app: myapp
+    security: S1
+spec:
+  affinity:
+      nodeAffinity:
+        requiredDuringSchedulingIgnoredDuringExecution:
+          nodeSelectorTerms:
+          - matchExpressions:
+            - key: label-key
+              operator: In
+              values:
+              - label-value1
+              - label-value2
+  containers:
+  - name: my-app
+    image: nginx
+  tolerations:
+  - key: "key1"
+    operator: "Equal"
+    value: "value1"
+    effect: "NoSchedule"
